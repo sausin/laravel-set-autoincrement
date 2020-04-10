@@ -11,12 +11,7 @@ Run the below command in your Laravel project root.
 ```bash
 composer require sausin/laravel-set-autoincrement
 ```
-This will install the latest version of the package for you.
-
-For Laravel versions `5.5` and above, the service provider will automatically register and do the needful for you. For Laravel `5.4`, you will have to register the service provide in `config/app.php` under `'providers'` key. Add the below entry:
-```php
-Sausin\DBSetAutoIncrement\SetAutoIncrementProvider::class,
-```
+This will install the latest version of the package for you. The service provider will automatically register and make available the features of the package (which work automatically).
 
 # Configuration
 
