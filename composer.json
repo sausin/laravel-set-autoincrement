@@ -1,0 +1,51 @@
+{
+    "name": "sausin/laravel-set-autoincrement",
+    "description": "Package to help with update of auto increment for database tables in laravel",
+    "keywords": ["laravel", "mysql", "sqlite", "auto-increment", , "autoincrement"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/sausin/laravel-set-autoincrement/issues",
+        "source": "https://github.com/sausin/laravel-set-autoincrement"
+    },
+    "authors": [
+        {
+            "name": "Saurabh Singhvi",
+            "email": "saurabh.singhvi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "doctrine/dbal": "^2.10",
+        "illuminate/support": "^5.4|^6.0|^7.0",
+        "illuminate/contracts": "^5.4|^6.0|^7.0",
+        "illuminate/database": "^5.4|^6.0|^7.0",
+        "illuminate/queue": "^5.4|^6.0|^7.0",
+        "illuminate/events": "^5.4|^6.0|^7.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.3.1",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sausin\\DBSetAutoIncrement\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sausin\\DBSetAutoIncrement\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sausin\\DBSetAutoIncrement\\SetAutoIncrementProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
