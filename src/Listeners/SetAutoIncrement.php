@@ -23,6 +23,9 @@ class SetAutoIncrement implements ShouldQueue
     /** @var array */
     public $autoIncrement;
 
+    /** @var array */
+    public $supportedDrivers = ['mysql', 'sqlite', 'pgsql'];
+
     /**
      * The name of the queue the job should be sent to.
      *
@@ -51,6 +54,12 @@ class SetAutoIncrement implements ShouldQueue
      */
     public function handle(MigrationsEnded $event)
     {
+        $driver = DB::connection()->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+        
+        if (! in_array($driver, $this->supportedDrivers)) {
+            return;
+        }
+
         $tables = collect([]);
 
         if ($this->mode === 'only') {
@@ -63,13 +72,28 @@ class SetAutoIncrement implements ShouldQueue
             });
         }
 
-        $driver = ucfirst(DB::connection()->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME));
+        $driver = ucfirst($driver);
 
         $this->{"update{$driver}Tables"}($tables);
     }
 
     /**
      * Update AUTO INCREMENT value in mysql tables.
+     *
+     * @param  Collection $tables
+     * @return void
+     */
+    protected function updateMysqlTables(Collection $tables): void
+    {
+        $tables->filter(function ($table) {
+            return DB::select("SHOW TABLE STATUS WHERE NAME = '{$table}'")[0]->Auto_increment < $this->autoIncrement;
+        })->map(function ($table) {
+            DB::statement("ALTER TABLE {$table} AUTO_INCREMENT={$this->autoIncrement}");
+        });
+    }
+
+    /**
+     * Update AUTO INCREMENT value in postgres tables.
      *
      * @param  Collection $tables
      * @return void
