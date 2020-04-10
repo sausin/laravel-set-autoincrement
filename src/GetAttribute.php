@@ -4,7 +4,7 @@ namespace Sausin\DBSetAutoIncrement;
 
 use Illuminate\Support\Facades\DB;
 
-trait TableAttribute
+trait GetAttribute
 {
     protected function getAutoIncrement($driver, $table): int
     {
