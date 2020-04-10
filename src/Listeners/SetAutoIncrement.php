@@ -40,10 +40,10 @@ class SetAutoIncrement implements ShouldQueue
      */
     public function __construct()
     {
-        $this->mode = Config::get('auto-increment.mode');
-        $this->skipTables = Config::get('auto-increment.skipTables');
-        $this->onlyTables = Config::get('auto-increment.onlyTables');
-        $this->autoIncrement = Config::get('auto-increment.autoIncrement');
+        $this->mode = Config::get('auto-increment.mode', 'skip');
+        $this->skipTables = Config::get('auto-increment.skipTables', ['migrations']);
+        $this->onlyTables = Config::get('auto-increment.onlyTables', []);
+        $this->autoIncrement = Config::get('auto-increment.autoIncrement', 100001);
     }
 
     /**
