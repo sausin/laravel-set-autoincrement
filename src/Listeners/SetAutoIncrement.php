@@ -2,8 +2,10 @@
 
 namespace Sausin\DBSetAutoIncrement\Listeners;
 
+use Sausin\DBSetAutoIncrement\DatabaseInfo;
+use Sausin\DBSetAutoIncrement\GetAttribute;
+use Sausin\DBSetAutoIncrement\UpdateAttribute;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,6 +13,10 @@ use Illuminate\Database\Events\MigrationsEnded;
 
 class SetAutoIncrement implements ShouldQueue
 {
+    use DatabaseInfo;
+    use GetAttribute;
+    use UpdateAttribute;
+
     /** @var array */
     public $skipTables;
 
@@ -62,7 +68,7 @@ class SetAutoIncrement implements ShouldQueue
             return;
         }
 
-        $driver = DB::connection()->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+        $driver = $this->getDatabaseName();
         
         if (! in_array($driver, $this->supportedDrivers)) {
             return;
@@ -75,7 +81,7 @@ class SetAutoIncrement implements ShouldQueue
         }
 
         if ($this->mode === 'skip') {
-            $tables = collect(DB::connection()->getDoctrineSchemaManager()->listTableNames())->reject(function ($value) {
+            $tables = collect($this->getTableList())->reject(function ($value) {
                 return in_array($value, $this->skipTables, true);
             });
         }
@@ -94,9 +100,9 @@ class SetAutoIncrement implements ShouldQueue
     protected function updateMysqlTables(Collection $tables): void
     {
         $tables->filter(function ($table) {
-            return data_get(DB::select("SHOW TABLE STATUS WHERE NAME = '{$table}'"), '0.Auto_increment') < $this->autoIncrement;
+            return $this->getAutoIncrement('Mysql', $table) < $this->autoIncrement;
         })->map(function ($table) {
-            DB::statement("ALTER TABLE {$table} AUTO_INCREMENT={$this->autoIncrement}");
+            $this->updateAutoIncrement('Mysql', $table);
         });
     }
 
@@ -112,9 +118,9 @@ class SetAutoIncrement implements ShouldQueue
         $this->autoIncrement--;
 
         $tables->filter(function ($table) {
-            return data_get(DB::select("SELECT * FROM SQLITE_SEQUENCE WHERE NAME = '{$table}'"), '0.seq') < $this->autoIncrement;
+            return $this->getAutoIncrement('Sqlite', $table) < $this->autoIncrement;
         })->map(function ($table) {
-            DB::statement("INSERT OR REPLACE INTO SQLITE_SEQUENCE('name', 'seq') VALUES('{$table}', {$this->autoIncrement})");
+            $this->updateAutoIncrement('Sqlite', $table);
         });
     }
 }
