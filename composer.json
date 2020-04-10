@@ -1,7 +1,7 @@
 {
     "name": "sausin/laravel-set-autoincrement",
     "description": "Package to help with update of auto increment for database tables in laravel",
-    "keywords": ["laravel", "mysql", "sqlite", "auto-increment", , "autoincrement"],
+    "keywords": ["laravel", "mysql", "sqlite", "auto-increment", "autoincrement"],
     "license": "MIT",
     "support": {
         "issues": "https://github.com/sausin/laravel-set-autoincrement/issues",
