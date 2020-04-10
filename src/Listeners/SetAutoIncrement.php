@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace Sausin\DBSetAutoIncrement\Listeners;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
