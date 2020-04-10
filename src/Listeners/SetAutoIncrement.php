@@ -98,12 +98,12 @@ class SetAutoIncrement implements ShouldQueue
      * @param  Collection $tables
      * @return void
      */
-    protected function updateMysqlTables(Collection $tables): void
+    protected function updatePgsqlTables(Collection $tables): void
     {
         $tables->filter(function ($table) {
             return DB::select("SHOW TABLE STATUS WHERE NAME = '{$table}'")[0]->Auto_increment < $this->autoIncrement;
         })->map(function ($table) {
-            DB::statement("ALTER TABLE {$table} AUTO_INCREMENT={$this->autoIncrement}");
+            DB::statement("ALTER SEQUENCE {$table}_id_seq RESTART WITH {$this->autoIncrement}");
         });
     }
 
