@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class SetAutoIncrementServiceProvider extends ServiceProvider
+class SetAutoIncrementProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
