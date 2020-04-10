@@ -28,18 +28,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Sausin\\SetAutoIncrement\\": "src/"
+            "Sausin\\DBSetAutoIncrement\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sausin\\SetAutoIncrement\\Tests\\": "tests/"
+            "Sausin\\DBSetAutoIncrement\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Sausin\\SetAutoIncrement\\SetAutoIncrementProvider"
+                "Sausin\\DBSetAutoIncrement\\SetAutoIncrementProvider"
             ]
         }
     },
