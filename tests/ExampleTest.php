@@ -1,6 +1,6 @@
 <?php
 
-namespace Sausin\SetAutoIncrement\Tests;
+namespace Sausin\DBSetAutoIncrement\Tests;
 
 use PHPUnit\Framework\TestCase;
 
