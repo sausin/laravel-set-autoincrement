@@ -94,7 +94,7 @@ class SetAutoIncrement implements ShouldQueue
     protected function updateMysqlTables(Collection $tables): void
     {
         $tables->filter(function ($table) {
-            return DB::select("SHOW TABLE STATUS WHERE NAME = '{$table}'")[0]->Auto_increment < $this->autoIncrement;
+            return data_get(DB::select("SHOW TABLE STATUS WHERE NAME = '{$table}'"), '0.Auto_increment') < $this->autoIncrement;
         })->map(function ($table) {
             DB::statement("ALTER TABLE {$table} AUTO_INCREMENT={$this->autoIncrement}");
         });
