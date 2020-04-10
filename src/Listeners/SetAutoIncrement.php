@@ -17,10 +17,13 @@ class SetAutoIncrement implements ShouldQueue
     /** @var array */
     public $onlyTables;
 
-    /** @var array */
+    /** @var string */
     public $mode;
 
     /** @var array */
+    public $action;
+
+    /** @var int */
     public $autoIncrement;
 
     /** @var array */
@@ -41,6 +44,7 @@ class SetAutoIncrement implements ShouldQueue
     public function __construct()
     {
         $this->mode = Config::get('auto-increment.mode', 'skip');
+        $this->action = Config::get('auto-increment.action', 'auto');
         $this->skipTables = Config::get('auto-increment.skipTables', ['migrations']);
         $this->onlyTables = Config::get('auto-increment.onlyTables', []);
         $this->autoIncrement = Config::get('auto-increment.autoIncrement', 100001);
@@ -54,6 +58,10 @@ class SetAutoIncrement implements ShouldQueue
      */
     public function handle(MigrationsEnded $event)
     {
+        if ($this->action !== 'auto') {
+            return;
+        }
+
         $driver = DB::connection()->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
         
         if (! in_array($driver, $this->supportedDrivers)) {
