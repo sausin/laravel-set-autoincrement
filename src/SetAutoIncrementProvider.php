@@ -23,7 +23,7 @@ class SetAutoIncrementProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerEvents()
+    protected function registerListener()
     {
         $events = $this->app->make(Dispatcher::class);
 
