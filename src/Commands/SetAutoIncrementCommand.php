@@ -6,13 +6,11 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Sausin\DBSetAutoIncrement\DatabaseInfo;
 use Sausin\DBSetAutoIncrement\GetAttribute;
-use Sausin\DBSetAutoIncrement\HandleTables;
 use Sausin\DBSetAutoIncrement\UpdateAttribute;
 
 class SetAutoIncrementCommand extends Command
 {
     use DatabaseInfo;
-    use HandleTables;
     use GetAttribute;
     use UpdateAttribute;
 
