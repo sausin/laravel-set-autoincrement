@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 
 class SetAutoIncrement implements ShouldQueue
 {
-    /** @var array */
+    /** @var string */
     public $action;
 
     /**
