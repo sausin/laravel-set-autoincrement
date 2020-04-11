@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class SetAutoIncrementProvider extends ServiceProvider
+class AutoIncrementServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -16,6 +16,7 @@ class SetAutoIncrementProvider extends ServiceProvider
     public function boot()
     {
         $this->registerListener();
+        $this->registerCommand();
     }
 
     /**
@@ -31,6 +32,15 @@ class SetAutoIncrementProvider extends ServiceProvider
             \Illuminate\Database\Events\MigrationsEnded::class,
             Listeners\SetAutoIncrement::class
         );
+    }
+    
+    protected function registerCommand()
+    {           
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\SetAutoIncrementCommand::class
+            ]);
+        }
     }
 
     /**

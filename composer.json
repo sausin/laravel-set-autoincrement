@@ -39,7 +39,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sausin\\DBSetAutoIncrement\\SetAutoIncrementProvider"
+                "Sausin\\DBSetAutoIncrement\\AutoIncrementServiceProvider"
             ]
         }
     },
