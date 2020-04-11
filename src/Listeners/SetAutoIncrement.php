@@ -32,6 +32,9 @@ class SetAutoIncrement implements ShouldQueue
     /** @var int */
     public $autoIncrement;
 
+    /** @var string */
+    public $driver;
+
     /** @var array */
     public $supportedDrivers = ['mysql', 'sqlite', 'pgsql'];
 
@@ -67,11 +70,9 @@ class SetAutoIncrement implements ShouldQueue
         if ($this->action !== 'auto') {
             return;
         }
-
-        $driver = $this->getDatabaseName();
         
-        if (! in_array($driver, $this->supportedDrivers)) {
-            return;
+        if (! $this->isDatabaseCompatible()) {
+            return
         }
 
         $tables = collect([]);
@@ -86,7 +87,7 @@ class SetAutoIncrement implements ShouldQueue
             });
         }
 
-        $driver = ucfirst($driver);
+        $driver = ucfirst($this->driver);
 
         $this->{"update{$driver}Tables"}($tables);
     }
