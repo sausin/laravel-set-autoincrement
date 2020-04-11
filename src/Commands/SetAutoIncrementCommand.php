@@ -2,13 +2,12 @@
 
 namespace Sausin\DBSetAutoIncrement\Commands;
 
-
-use Sausin\DBSetAutoIncrement\DatabaseInfo;
-use Sausin\DBSetAutoIncrement\HandleTables;
-use Sausin\DBSetAutoIncrement\GetAttribute;
-use Sausin\DBSetAutoIncrement\UpdateAttribute;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
+use Sausin\DBSetAutoIncrement\DatabaseInfo;
+use Sausin\DBSetAutoIncrement\GetAttribute;
+use Sausin\DBSetAutoIncrement\HandleTables;
+use Sausin\DBSetAutoIncrement\UpdateAttribute;
 
 class SetAutoIncrementCommand extends Command
 {
@@ -75,10 +74,10 @@ class SetAutoIncrementCommand extends Command
     public function handle()
     {
         $this->autoIncrement = $this->option('value') ?? Config::get('auto-increment.autoIncrement', 100001);
-        
+
         if (! $this->isDatabaseCompatible()) {
             $this->info("Database {$driver} not supported");
-            
+
             return;
         }
 
@@ -86,8 +85,8 @@ class SetAutoIncrementCommand extends Command
 
         if ($this->option('tables')) {
             $this->{"update{$driver}Tables"}(collect($this->option('tables')));
-            
-            $this->info("Specified tables have been updated");
+
+            $this->info('Specified tables have been updated');
 
             return;
         }
@@ -105,7 +104,7 @@ class SetAutoIncrementCommand extends Command
         }
 
         $this->{"update{$driver}Tables"}($tables);
-        $this->info("Tables have been updated as per config");
+        $this->info('Tables have been updated as per config');
     }
 
     /**

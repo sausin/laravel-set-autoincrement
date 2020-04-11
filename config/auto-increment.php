@@ -13,7 +13,7 @@ return [
     // increment value. If this is set to 'only', then only
     // the specified tables will be updated.
     'mode' => 'skip',
-    
+
     // Whether the package should run automatically or only
     // when a command is executed by the user.
     'action' => 'auto',

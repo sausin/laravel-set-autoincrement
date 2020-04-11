@@ -9,7 +9,7 @@ trait DatabaseInfo
     protected function isDatabaseCompatible(): bool
     {
         $this->driver = $this->getDatabaseName();
-        
+
         return in_array($this->driver, $this->supportedDrivers);
     }
 
@@ -17,7 +17,7 @@ trait DatabaseInfo
     {
         return DB::connection()->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
     }
-    
+
     protected function getTableList(): array
     {
         return DB::connection()->getDoctrineSchemaManager()->listTableNames();

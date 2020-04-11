@@ -12,12 +12,12 @@ trait UpdateAttribute
 
         $this->{$method}($table);
     }
-    
+
     protected function updateMysqlAutoIncrement($table): void
     {
         DB::statement("ALTER TABLE {$table} AUTO_INCREMENT={$this->autoIncrement}");
     }
-    
+
     protected function updateSqliteAutoIncrement($table): void
     {
         DB::statement("INSERT OR REPLACE INTO SQLITE_SEQUENCE('name', 'seq') VALUES('{$table}', {$this->autoIncrement})");

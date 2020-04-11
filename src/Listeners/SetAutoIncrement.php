@@ -2,10 +2,10 @@
 
 namespace Sausin\DBSetAutoIncrement\Listeners;
 
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Events\MigrationsEnded;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 
 class SetAutoIncrement implements ShouldQueue
 {
@@ -40,7 +40,7 @@ class SetAutoIncrement implements ShouldQueue
         if ($this->action !== 'auto') {
             return;
         }
-        
+
         Artisan::call('db:set-auto-increment');
     }
 }
