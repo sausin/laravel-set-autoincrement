@@ -1,6 +1,7 @@
 # Laravel package to Set custom Auto Increment in database
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sausin/laravel-set-autoincrement.svg?style=flat-square)](https://packagist.org/packages/sausin/laravel-set-autoincrement)
 [![Total Downloads](https://img.shields.io/packagist/dt/sausin/laravel-set-autoincrement.svg?style=flat-square)](https://packagist.org/packages/sausin/laravel-set-autoincrement)
+[![Quality Score](https://img.shields.io/scrutinizer/g/sausin/laravel-set-autoincrement.svg?style=flat-square)](https://scrutinizer-ci.com/g/sausin/laravel-set-autoincrement)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 Wanted to easily set the starting ID for your models? This package makes it easy as a breeze!
