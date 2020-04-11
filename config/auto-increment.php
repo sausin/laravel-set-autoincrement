@@ -16,7 +16,7 @@ return [
     
     // Whether the package should run automatically or only
     // when a command is executed by the user.
-    'action' => 'auto'
+    'action' => 'auto',
 
     // Auto increment value to be set in the relevant tables.
     // New entries to the relevant tables will be created
