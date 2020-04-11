@@ -1,4 +1,4 @@
-# Laravel package to Set custom Auto Increment in database
+# Laravel package to set custom Auto Increment in database
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sausin/laravel-set-autoincrement.svg?style=flat-square)](https://packagist.org/packages/sausin/laravel-set-autoincrement)
 [![Total Downloads](https://img.shields.io/packagist/dt/sausin/laravel-set-autoincrement.svg?style=flat-square)](https://packagist.org/packages/sausin/laravel-set-autoincrement)
 [![Quality Score](https://img.shields.io/scrutinizer/g/sausin/laravel-set-autoincrement.svg?style=flat-square)](https://scrutinizer-ci.com/g/sausin/laravel-set-autoincrement)
