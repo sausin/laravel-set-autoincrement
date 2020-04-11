@@ -2,9 +2,8 @@
 
 namespace Sausin\DBSetAutoIncrement;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\ServiceProvider;
 
 class AutoIncrementServiceProvider extends ServiceProvider
 {
@@ -33,12 +32,12 @@ class AutoIncrementServiceProvider extends ServiceProvider
             Listeners\SetAutoIncrement::class
         );
     }
-    
+
     protected function registerCommand()
-    {           
+    {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                Commands\SetAutoIncrementCommand::class
+                Commands\SetAutoIncrementCommand::class,
             ]);
         }
     }
