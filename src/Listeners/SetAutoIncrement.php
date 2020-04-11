@@ -32,7 +32,7 @@ class SetAutoIncrement implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  MigrationsEnded  $event
      * @return void
      */
     public function handle(MigrationsEnded $event)
