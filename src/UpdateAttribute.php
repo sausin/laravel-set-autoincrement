@@ -23,6 +23,7 @@ trait UpdateAttribute
 
     protected function updateSqliteAutoIncrement($table): void
     {
-        DB::statement("INSERT OR REPLACE INTO SQLITE_SEQUENCE('name', 'seq') VALUES('{$table}', {$this->autoIncrement})");
+        DB::statement("DELETE FROM SQLITE_SEQUENCE WHERE name = '{$table}'");
+        DB::statement("INSERT INTO SQLITE_SEQUENCE(name, seq) VALUES('{$table}', {$this->autoIncrement})");
     }
 }
