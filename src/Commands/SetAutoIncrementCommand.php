@@ -59,6 +59,8 @@ class SetAutoIncrementCommand extends Command
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->mode = Config::get('auto-increment.mode', 'skip');
         $this->skipTables = Config::get('auto-increment.skipTables', ['migrations']);
         $this->onlyTables = Config::get('auto-increment.onlyTables', []);
