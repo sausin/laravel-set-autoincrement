@@ -22,7 +22,7 @@ To change the starting value and the tables affected by it, the configuration ca
 ```sh
 php artisan vendor:publish
 ```
-and then the option which corresponds to `Sausin\DBSetAutoIncrement\SetAutoIncrementProvider` needs to be selected. This will add a config named `auto-increment.php` in your project's config folder.
+and then the option which corresponds to `Sausin\DBSetAutoIncrement\AutoIncrementServiceProvider` needs to be selected. This will add a config named `auto-increment.php` in your project's config folder.
 
 Change the values as desired.
 
