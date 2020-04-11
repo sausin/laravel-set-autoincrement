@@ -69,7 +69,7 @@ class SetAutoIncrementCommand extends Command
         $this->action = Config::get('auto-increment.action', 'auto');
         $this->skipTables = Config::get('auto-increment.skipTables', ['migrations']);
         $this->onlyTables = Config::get('auto-increment.onlyTables', []);
-        $this->autoIncrement = Config::get('auto-increment.autoIncrement', 100001);
+        
     }
 
     /**
@@ -79,7 +79,7 @@ class SetAutoIncrementCommand extends Command
      */
     public function handle()
     {
-        $autoIncrement = $this->option('value') ?? Config::get('auto-increment.autoIncrement');
+        $this->autoIncrement = $this->option('value') ?? Config::get('auto-increment.autoIncrement', 100001);
         
         if (! $this->isDatabaseCompatible()) {
             $this->info("Database {$driver} not supported");
