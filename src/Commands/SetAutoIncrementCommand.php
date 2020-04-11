@@ -42,9 +42,6 @@ class SetAutoIncrementCommand extends Command
     /** @var string */
     protected $mode;
 
-    /** @var array */
-    protected $action;
-
     /** @var int */
     protected $autoIncrement;
 
@@ -66,10 +63,8 @@ class SetAutoIncrementCommand extends Command
     public function __construct()
     {
         $this->mode = Config::get('auto-increment.mode', 'skip');
-        $this->action = Config::get('auto-increment.action', 'auto');
         $this->skipTables = Config::get('auto-increment.skipTables', ['migrations']);
         $this->onlyTables = Config::get('auto-increment.onlyTables', []);
-        
     }
 
     /**
