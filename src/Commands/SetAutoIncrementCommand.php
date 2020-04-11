@@ -3,6 +3,7 @@
 namespace Sausin\DBSetAutoIncrement\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Sausin\DBSetAutoIncrement\DatabaseInfo;
 use Sausin\DBSetAutoIncrement\GetAttribute;
@@ -38,6 +39,9 @@ class SetAutoIncrementCommand extends Command
 
     /** @var string */
     protected $mode;
+
+    /** @var string */
+    protected $driver;
 
     /** @var int */
     protected $autoIncrement;
@@ -76,7 +80,7 @@ class SetAutoIncrementCommand extends Command
         $this->autoIncrement = $this->option('value') ?? Config::get('auto-increment.autoIncrement', 100001);
 
         if (! $this->isDatabaseCompatible()) {
-            $this->info("Database {$driver} not supported");
+            $this->info("Database {$this->driver} not supported");
 
             return;
         }

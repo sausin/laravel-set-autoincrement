@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 
 trait UpdateAttribute
 {
+    /**
+     * @param string $driver
+     */
     protected function updateAutoIncrement($driver, $table): void
     {
         $method = "update{$driver}AutoIncrement";
