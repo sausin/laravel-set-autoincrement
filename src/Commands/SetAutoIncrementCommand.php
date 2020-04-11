@@ -87,6 +87,8 @@ class SetAutoIncrementCommand extends Command
         if ($this->option('tables')) {
             $this->{"update{$driver}Tables"}(collect($this->option('tables')));
             
+            $this->info("Specified tables have been updated");
+
             return;
         }
 
@@ -103,5 +105,39 @@ class SetAutoIncrementCommand extends Command
         }
 
         $this->{"update{$driver}Tables"}($tables);
+        $this->info("Tables have been updated as per config");
+    }
+
+    /**
+     * Update AUTO INCREMENT value in mysql tables.
+     *
+     * @param  Collection $tables
+     * @return void
+     */
+    protected function updateMysqlTables(Collection $tables): void
+    {
+        $tables->filter(function ($table) {
+            return $this->getAutoIncrement('Mysql', $table) < $this->autoIncrement;
+        })->map(function ($table) {
+            $this->updateAutoIncrement('Mysql', $table);
+        });
+    }
+
+    /**
+     * Update AUTO INCREMENT value in sqlite tables.
+     *
+     * @param  Collection $tables
+     * @return void
+     */
+    protected function updateSqliteTables(Collection $tables): void
+    {
+        // the auto increment value is reduced by 1 as SQLITE uses it in this way
+        $this->autoIncrement--;
+
+        $tables->filter(function ($table) {
+            return $this->getAutoIncrement('Sqlite', $table) < $this->autoIncrement;
+        })->map(function ($table) {
+            $this->updateAutoIncrement('Sqlite', $table);
+        });
     }
 }
