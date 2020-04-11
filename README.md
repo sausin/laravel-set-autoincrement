@@ -18,17 +18,19 @@ This will install the latest version of the package for you. The service provide
 
 The default configuration will set the package such that except a few tables, the `AUTO_INCREMENT` counter will be set at `100001` (one hundred thousand and one).
 
-If you would like to change the starting value and the tables affected by it, you can publish the configuration using
+To change the starting value and the tables affected by it, the configuration can be published using
 ```bash
 php artisan vendor:publish
 ```
-and then select the option which corresponds to `Sausin\DBSetAutoIncrement\SetAutoIncrementProvider`. This will add a config named `auto-increment.php` in your project's config folder.
+and then the option which corresponds to `Sausin\DBSetAutoIncrement\SetAutoIncrementProvider` needs to be selected. This will add a config named `auto-increment.php` in your project's config folder.
 
-Change the values as you need.
+Change the values as desired.
 
 # Behavior
 
-It will run every time you're finished running migrations, whether for the first time or incremental. All tables where the `AUTO_INCREMENT` value is higher than the value in the config will be left alone. Changes will be made in all the rest.
+It will run every time  migrations are finished running, whether for the first time or incremental. All tables where the `AUTO_INCREMENT` value is higher than the value in the config will be left alone. Changes will be made in all the rest.
+
+If, however, automatic updation behaviour is not desired, the `action` key in the config file can be changed to `manual` and the package will not take automatic action.
 
 # Supported SQL Drivers
 
