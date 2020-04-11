@@ -10,7 +10,7 @@ trait DatabaseInfo
     {
         $this->driver = $this->getDatabaseName();
         
-        return in_array($this->driver, $this->supportedDrivers))
+        return in_array($this->driver, $this->supportedDrivers));
     }
 
     protected function getDatabaseName(): string
