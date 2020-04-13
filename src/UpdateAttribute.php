@@ -13,15 +13,11 @@ trait UpdateAttribute
     {
         $method = "update{$driver}AutoIncrement";
         
-        try {
-            DB::beginTransaction();
-            
+        // perform changes as a transaction to avoid
+        // borking the database in case of issues.
+        DB::transaction(function () {
             $this->{$method}($table);
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        });
     }
 
     protected function updateMysqlAutoIncrement($table): void
