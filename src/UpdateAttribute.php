@@ -15,7 +15,7 @@ trait UpdateAttribute
         
         // perform changes as a transaction to avoid
         // borking the database in case of issues.
-        DB::transaction(function () {
+        DB::transaction(function () use ($method, $table) {
             $this->{$method}($table);
         });
     }
