@@ -12,7 +12,7 @@ trait UpdateAttribute
     protected function updateAutoIncrement($driver, $table): void
     {
         $method = "update{$driver}AutoIncrement";
-        
+
         // perform changes as a transaction to avoid
         // borking the database in case of issues.
         DB::transaction(function () use ($method, $table) {
