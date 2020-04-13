@@ -12,8 +12,16 @@ trait UpdateAttribute
     protected function updateAutoIncrement($driver, $table): void
     {
         $method = "update{$driver}AutoIncrement";
+        
+        try {
+            DB::beginTransaction();
+            
+            $this->{$method}($table);
 
-        $this->{$method}($table);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     }
 
     protected function updateMysqlAutoIncrement($table): void
