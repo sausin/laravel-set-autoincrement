@@ -13,13 +13,6 @@ class SetAutoIncrement implements ShouldQueue
     public $action;
 
     /**
-     * The name of the queue the job should be sent to.
-     *
-     * @var string|null
-     */
-    public $queue = 'monitoring';
-
-    /**
      * Create the event listener.
      *
      * @return void
