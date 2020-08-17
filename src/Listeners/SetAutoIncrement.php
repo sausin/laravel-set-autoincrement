@@ -7,7 +7,7 @@ use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 
-class SetAutoIncrement implements ShouldQueue
+class SetAutoIncrement
 {
     /** @var string */
     public $action;
